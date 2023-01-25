@@ -6,12 +6,18 @@ import Button from '@mui/material/Button';
 import Autocomplete from '@mui/material/Autocomplete';
 import './main.css';
 import availableProducts, { IProduct } from './products';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { addProductToShoppingCart } from '../../redux/rootReducer';
+import ShoppingCartDrawer from '../shoppingCartDrawer/shoppingCartDrawer';
+import ResultModal from '../resultModal/resultModal';
+import { RootState } from '../../redux/store';
 
 function Main() {
 
   const [product, setProduct] = React.useState<IProduct>()
+  const modalInfo = useSelector(
+    (state: RootState) => state.root.modal
+  )
   const dispatch = useDispatch()
 
   return (
@@ -40,6 +46,11 @@ function Main() {
           }
         }}>Add</Button>
       </Box>
+
+      <ShoppingCartDrawer></ShoppingCartDrawer>
+      <ResultModal open={modalInfo.opened} title={modalInfo.title} onCloseCallback={modalInfo.onCloseCallback}>
+        { modalInfo.content ? React.createElement(modalInfo.content.type, modalInfo.content.props):  <p></p>}
+      </ResultModal>
     </div>
   );
 }

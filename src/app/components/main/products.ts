@@ -4,6 +4,7 @@ export interface IProduct {
     id: number
     name: string
     price: number
+    quantity: number
 }
 
 const productGenerator = (numberOfProducts: number) => {
@@ -12,11 +13,16 @@ const productGenerator = (numberOfProducts: number) => {
         result.push({
             id: index + 1,
             name: `${index + 1}-${faker.commerce.product()}`,
-            price: 11.55
+            price: randomFromInterval(10,100),
+            quantity: 0
         })
     });
     return result
 }
+
+const randomFromInterval = (min: number, max: number) => {
+    return Number((Math.random() * (max - min + 1) + min).toFixed(2))
+  }
 
 const availableProducts: IProduct[] = productGenerator(100)
 
