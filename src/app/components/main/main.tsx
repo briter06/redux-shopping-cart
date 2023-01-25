@@ -1,10 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import NavBar from '../navBar/navBar';
+import logo from '../../../logo.svg';
+import './main.css';
 
-function App() {
+function Main() {
   return (
     <div className="App">
+      <NavBar></NavBar>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -23,4 +25,4 @@ function App() {
   );
 }
 
-export default App;
+export default Main;
