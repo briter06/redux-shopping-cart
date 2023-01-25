@@ -15,7 +15,7 @@ interface IState {
     }
 }
 
-const initialState: IState = {
+export const generateInitialState: () => IState = () => ({
   shoppingCart: {
     products: [],
     drawerOpened: false
@@ -25,11 +25,11 @@ const initialState: IState = {
     opened: false,
     title: ''
   }
-};
+});
 
 export const rootSlice = createSlice({
   name: 'RootReducer',
-  initialState: initialState,
+  initialState: generateInitialState(),
   reducers: {
     addProductToShoppingCart: (state: IState, action: PayloadAction<IProduct>) => {
       return produce(state, newState => {
