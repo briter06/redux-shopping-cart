@@ -1,9 +1,10 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import produce from "immer";
+import { IProduct } from "../components/main/products";
 
 interface IState {
     shoppingCart: {
-        products: string[]
+        products: IProduct[]
     }
 }
 
@@ -17,9 +18,11 @@ export const rootSlice = createSlice({
   name: 'RootReducer',
   initialState: initialState,
   reducers: {
-    addProductToShoppingCart: (state: IState, action) => {
+    addProductToShoppingCart: (state: IState, action: PayloadAction<IProduct>) => {
         return produce(state, newState => {
-            newState.shoppingCart.products.push(action.payload.productId)
+          if(action.payload){
+            newState.shoppingCart.products.push(action.payload)
+          }
         })
     }
   },
